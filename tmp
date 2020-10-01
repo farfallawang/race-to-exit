@@ -1,0 +1,28 @@
+1. You can run `python HospitalIQ.py` from terminal
+
+2. 
+1) Check if there are any missingness in the data. If yes, either do an imputation or drop missing values or create missing vs. non-missing indicator depends on the type of missingness
+2) Check if the distribution of the data is skewed, if yes then do log transformation
+3) If features are on a significantly different scale, they also need to be normalized or standardized 
+
+3.
+1) I dropped the variable `last_name` because features such as id and names are not generalizable to unseen values.
+2) I found that there's only one hospital id in this dataset. Thus we can safely drop that variable since it won't make a difference.
+3) I performed one-hot encoding on `service id`,  since it's a categorical variable. And to avoid perfect collinearity, I choose `service id = 1` to be the base value and drop it while fitting the model.
+
+4. One thing to keep in mind is that we need to hold all the other variables constant when interpreting one coefficient.
+1) `Intercept`: holding all other variables constant, a surgeon would perform 3.2 more surgeries if he/she is doing cardiothoracic surgery.
+2) `age_in_yrs`: holding all other variables constant, a surgeon would perform -0.02 fewer surgeries if his/her age increases by 1.
+3) `surgeries_last_month`: holding all other variables constant, a surgeon would perform 1.2 more surgeries if the surgeries he/she did in the past month increases by 1.
+4) `service2`: holding all other variables constant, a surgeon would perform 31 more surgeries if he/she is doing general surgery.
+5) `service3`: holding all other variables constant, a surgeon would perform 16 fewer surgeries if he/she is doing orthopedic surgery.
+
+5. It's standard practice to use adjusted R^2 to evaluate the goodness of fit. While the maximum possible value is 1, the closer the adjusted R^2 is to 1, the better the model fits the data. Here adjusted R^2 is about 0.94, meaning the model fits the data reasonably well overall.
+Here F-statistics is also very large, meaning that we can
+(We avoid using R^2 because R^2 always increases as you include more features.)
+
+6. The summary results show a few things:
+1) Information related to the coefficients: point estimate, standard error, p-values (when the p-value is smaller than 0.05, it means including the coefficient makes a significant difference than not including), and confidence interval.
+2) How well the model fits the data: R^2, adjusted R^2, F-stats, Prob of F-stats
+3)
+
